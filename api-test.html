@@ -1,0 +1,230 @@
+<!-- Save this as test.html in your browser and open it to test API connectivity -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Connectivity Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            max-width: 1000px;
+            margin: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .test {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background: #252526;
+        }
+        .test h3 {
+            margin: 0 0 10px 0;
+            color: #4ec9b0;
+        }
+        .success {
+            color: #6a9955;
+        }
+        .error {
+            color: #f48771;
+        }
+        .info {
+            color: #9cdcfe;
+        }
+        button {
+            padding: 8px 15px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 5px 5px 5px 0;
+        }
+        button:hover {
+            background: #005a9e;
+        }
+        pre {
+            background: #1e1e1e;
+            padding: 10px;
+            border-left: 3px solid #007acc;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .loading {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 API Connectivity Test</h1>
+    
+    <div class="test">
+        <h3>📡 Test Endpoints</h3>
+        <button onclick="testHealth()">Test /health</button>
+        <button onclick="testServices()">Test /api/services</button>
+        <button onclick="testStats()">Test /api/donations/stats</button>
+        <button onclick="testCORS()">Test CORS Headers</button>
+        <button onclick="testAll()">Run All Tests</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000';
+        
+        function log(test, status, message, data = null) {
+            const resultsDiv = document.getElementById('results');
+            const testDiv = document.createElement('div');
+            testDiv.className = 'test';
+            
+            let statusClass = status === 'success' ? 'success' : status === 'error' ? 'error' : 'info';
+            let statusSymbol = status === 'success' ? '✅' : status === 'error' ? '❌' : 'ℹ️';
+            
+            let html = `
+                <h3>${statusSymbol} ${test}</h3>
+                <div class="${statusClass}">${message}</div>
+            `;
+            
+            if (data) {
+                html += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+            
+            testDiv.innerHTML = html;
+            resultsDiv.appendChild(testDiv);
+        }
+
+        async function testHealth() {
+            console.log('Testing /health endpoint...');
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    log(
+                        'Health Check',
+                        'success',
+                        `Status: ${response.status} - Server is running`,
+                        {
+                            database: data.database,
+                            razorpay: data.razorpay,
+                            environment: data.environment
+                        }
+                    );
+                } else {
+                    log('Health Check', 'error', `Status: ${response.status}`, data);
+                }
+            } catch (error) {
+                log('Health Check', 'error', `Network Error: ${error.message}`);
+            }
+        }
+
+        async function testServices() {
+            console.log('Testing /api/services endpoint...');
+            try {
+                const response = await fetch(`${API_BASE}/api/services`);
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    log(
+                        '/api/services',
+                        'success',
+                        `Status: ${response.status} - ${data.data.length} services found`,
+                        {
+                            count: data.data.length,
+                            services: data.data.map(s => ({
+                                id: s.service_id,
+                                name: s.name,
+                                target: s.target_amount,
+                                current: s.current_amount,
+                                donors: s.donor_count
+                            }))
+                        }
+                    );
+                } else {
+                    log('/api/services', 'error', `Status: ${response.status}`, data);
+                }
+            } catch (error) {
+                log('/api/services', 'error', `Network Error: ${error.message}`);
+            }
+        }
+
+        async function testStats() {
+            console.log('Testing /api/donations/stats endpoint...');
+            try {
+                const response = await fetch(`${API_BASE}/api/donations/stats`);
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    log(
+                        '/api/donations/stats',
+                        'success',
+                        `Status: ${response.status} - Stats retrieved`,
+                        {
+                            overall: data.overall,
+                            by_service_count: data.by_service?.length || 0,
+                            storage_type: data.storage_type
+                        }
+                    );
+                } else {
+                    log('/api/donations/stats', 'error', `Status: ${response.status}`, data);
+                }
+            } catch (error) {
+                log('/api/donations/stats', 'error', `Network Error: ${error.message}`);
+            }
+        }
+
+        async function testCORS() {
+            console.log('Testing CORS headers...');
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                
+                const corsHeaders = {
+                    'access-control-allow-origin': response.headers.get('access-control-allow-origin'),
+                    'access-control-allow-methods': response.headers.get('access-control-allow-methods'),
+                    'access-control-allow-headers': response.headers.get('access-control-allow-headers'),
+                    'content-type': response.headers.get('content-type')
+                };
+                
+                log(
+                    'CORS Headers',
+                    'info',
+                    'Headers from /health endpoint',
+                    corsHeaders
+                );
+            } catch (error) {
+                log('CORS Headers', 'error', `Network Error: ${error.message}`);
+            }
+        }
+
+        async function testAll() {
+            document.getElementById('results').innerHTML = '';
+            await testHealth();
+            await new Promise(r => setTimeout(r, 500));
+            await testServices();
+            await new Promise(r => setTimeout(r, 500));
+            await testStats();
+            await new Promise(r => setTimeout(r, 500));
+            await testCORS();
+        }
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            log('System', 'info', 'Test environment ready. Click buttons above or run all tests.');
+            log('Configuration', 'info', 
+                'API Base URL: ' + API_BASE,
+                {
+                    frontend_url: window.location.origin,
+                    backend_api: API_BASE + '/api',
+                    browser: navigator.userAgent.split(' ').slice(-2).join(' ')
+                }
+            );
+        });
+    </script>
+</body>
+</html>

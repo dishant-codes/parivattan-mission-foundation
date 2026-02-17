@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Integration Test</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #3B82F6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #2563EB; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #D1FAE5; color: #065F46; border: 1px solid #10B981; }
+        .error { background: #FEE2E2; color: #991B1B; border: 1px solid #EF4444; }
+        .info { background: #DBEAFE; color: #1E40AF; border: 1px solid #3B82F6; }
+        pre { background: #F3F4F6; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Razorpay Integration Test</h1>
+    
+    <div class="test-section">
+        <h2>Environment Check</h2>
+        <div id="env-status"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Backend API Test</h2>
+        <button onclick="testBackendHealth()">Test Backend Health</button>
+        <button onclick="testCreateOrder()">Test Create Order</button>
+        <div id="api-status"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Razorpay Script Test</h2>
+        <button onclick="testRazorpayScript()">Test Razorpay Script</button>
+        <button onclick="testRazorpayCheckout()">Test Razorpay Checkout</button>
+        <div id="razorpay-status"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Full Payment Flow Test</h2>
+        <button onclick="testFullPaymentFlow()">Test Full Payment Flow</button>
+        <div id="payment-status"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        const RAZORPAY_KEY = 'rzp_test_RjfaxVUjNZr3xh';
+        
+        function addStatus(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = message;
+            container.appendChild(statusDiv);
+        }
+        
+        function addPre(containerId, data) {
+            const container = document.getElementById(containerId);
+            const pre = document.createElement('pre');
+            pre.textContent = JSON.stringify(data, null, 2);
+            container.appendChild(pre);
+        }
+        
+        // Environment Check
+        function checkEnvironment() {
+            addStatus('env-status', '🔍 Checking environment...', 'info');
+            
+            // Check if running on HTTPS or localhost
+            const isSecure = location.protocol === 'https:' || location.hostname === 'localhost';
+            addStatus('env-status', `Protocol: ${location.protocol} - ${isSecure ? '✅ OK' : '❌ Razorpay requires HTTPS in production'}`, isSecure ? 'success' : 'error');
+            
+            // Check Razorpay key
+            addStatus('env-status', `Razorpay Key: ${RAZORPAY_KEY.substring(0, 12)}... - ${RAZORPAY_KEY ? '✅ Set' : '❌ Not set'}`, RAZORPAY_KEY ? 'success' : 'error');
+            
+            // Check if Razorpay script loaded
+            addStatus('env-status', `Razorpay Script: ${window.Razorpay ? '✅ Loaded' : '❌ Not loaded'}`, window.Razorpay ? 'success' : 'error');
+        }
+        
+        // Test Backend Health
+        async function testBackendHealth() {
+            addStatus('api-status', '🔍 Testing backend health...', 'info');
+            
+            try {
+                const response = await fetch(`${API_URL}/../health`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    addStatus('api-status', '✅ Backend is healthy', 'success');
+                    addPre('api-status', data);
+                } else {
+                    addStatus('api-status', '❌ Backend health check failed', 'error');
+                    addPre('api-status', data);
+                }
+            } catch (error) {
+                addStatus('api-status', `❌ Backend connection failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test Create Order
+        async function testCreateOrder() {
+            addStatus('api-status', '🔍 Testing create order API...', 'info');
+            
+            try {
+                const response = await fetch(`${API_URL}/donations/create-order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: 1000,
+                        service_id: 'test-service',
+                        service_name: 'Test Service',
+                        currency: 'INR'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    addStatus('api-status', '✅ Order created successfully', 'success');
+                    addPre('api-status', data);
+                } else {
+                    addStatus('api-status', `❌ Order creation failed: ${data.error}`, 'error');
+                    addPre('api-status', data);
+                }
+            } catch (error) {
+                addStatus('api-status', `❌ API call failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test Razorpay Script
+        function testRazorpayScript() {
+            addStatus('razorpay-status', '🔍 Testing Razorpay script...', 'info');
+            
+            if (window.Razorpay) {
+                addStatus('razorpay-status', '✅ Razorpay script loaded successfully', 'success');
+                addStatus('razorpay-status', `Razorpay version: ${window.Razorpay.version || 'Unknown'}`, 'info');
+            } else {
+                addStatus('razorpay-status', '❌ Razorpay script not loaded', 'error');
+            }
+        }
+        
+        // Test Razorpay Checkout
+        function testRazorpayCheckout() {
+            addStatus('razorpay-status', '🔍 Testing Razorpay checkout...', 'info');
+            
+            if (!window.Razorpay) {
+                addStatus('razorpay-status', '❌ Razorpay script not loaded', 'error');
+                return;
+            }
+            
+            const options = {
+                key: RAZORPAY_KEY,
+                amount: 100000, // ₹1000 in paise
+                currency: 'INR',
+                name: 'Test Company',
+                description: 'Test Transaction',
+                handler: function(response) {
+                    addStatus('razorpay-status', '✅ Payment successful!', 'success');
+                    addPre('razorpay-status', response);
+                },
+                modal: {
+                    ondismiss: function() {
+                        addStatus('razorpay-status', '⚠️ Payment cancelled by user', 'info');
+                    }
+                },
+                theme: {
+                    color: '#3B82F6'
+                }
+            };
+            
+            try {
+                const rzp = new window.Razorpay(options);
+                rzp.open();
+                addStatus('razorpay-status', '✅ Razorpay checkout opened', 'success');
+            } catch (error) {
+                addStatus('razorpay-status', `❌ Failed to open Razorpay: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test Full Payment Flow
+        async function testFullPaymentFlow() {
+            addStatus('payment-status', '🔍 Starting full payment flow test...', 'info');
+            
+            try {
+                // Step 1: Create order
+                addStatus('payment-status', 'Step 1: Creating order...', 'info');
+                const orderResponse = await fetch(`${API_URL}/donations/create-order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: 1000,
+                        service_id: 'test-service',
+                        service_name: 'Test Service',
+                        currency: 'INR'
+                    })
+                });
+                
+                const orderData = await orderResponse.json();
+                
+                if (!orderData.success) {
+                    throw new Error(`Order creation failed: ${orderData.error}`);
+                }
+                
+                addStatus('payment-status', '✅ Order created successfully', 'success');
+                
+                // Step 2: Open Razorpay
+                addStatus('payment-status', 'Step 2: Opening Razorpay checkout...', 'info');
+                
+                const options = {
+                    key: orderData.key || RAZORPAY_KEY,
+                    amount: orderData.order.amount,
+                    currency: orderData.order.currency,
+                    name: 'Heavenly Hands Test',
+                    description: 'Test Donation',
+                    order_id: orderData.order.id,
+                    handler: async function(response) {
+                        addStatus('payment-status', '✅ Payment completed!', 'success');
+                        addPre('payment-status', response);
+                        
+                        // Step 3: Verify payment
+                        addStatus('payment-status', 'Step 3: Verifying payment...', 'info');
+                        // You can add verification logic here
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            addStatus('payment-status', '⚠️ Payment cancelled', 'info');
+                        }
+                    },
+                    theme: {
+                        color: '#3B82F6'
+                    }
+                };
+                
+                const rzp = new window.Razorpay(options);
+                rzp.open();
+                addStatus('payment-status', '✅ Full payment flow initiated', 'success');
+                
+            } catch (error) {
+                addStatus('payment-status', `❌ Payment flow failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            checkEnvironment();
+        };
+    </script>
+</body>
+</html>
