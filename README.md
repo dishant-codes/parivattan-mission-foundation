@@ -1,69 +1,84 @@
-# Welcome to your Lovable project
+# Parivattan Mission Foundation
 
-## Project info
+Parivattan Mission Foundation is focused on transforming lives through education, healthcare access, environmental stewardship, and women’s leadership. The project powering this site is a Vite + React app styled with Tailwind.
 
-**URL**: https://lovable.dev/projects/3d16cc18-3fe5-4fdd-a153-a60aad8efd06
+## Mission & Vision
+- Empower marginalized communities with quality education, healthcare, environmental sustainability, and women’s rights.
+- Build a just, sustainable society where everyone accesses opportunity with dignity and self-reliance.
 
-## How can I edit this code?
+## Core Focus Areas
+- Education and skill-building
+- Healthcare outreach and wellness
+- Environmental sustainability
+- Women empowerment and leadership
 
-There are several ways of editing your application.
+## Signature Appeal
+- Parivattan Sathi: ₹135/month (“₹135 for the 135th Jayanti”) to strengthen Babasaheb’s education movement.
 
-**Use Lovable**
+## Fundraising Goal
+- ₹25,00,000 target to sustain and expand initiatives; live progress is shown in the app via recurring contributions and subscriptions.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3d16cc18-3fe5-4fdd-a153-a60aad8efd06) and start prompting.
+## Current Initiatives
+- Community Health Initiative (featured project; 500+ families helped)
+- Japanese Language Learning (100+ students enrolled)
+- Social Awareness Programs (50+ active volunteers)
+- Ongoing campaigns: Health For All, Education Festival, Foreign Language access, Environment Sustainability, Sau Library Campaign, Disaster Aid Fund, Overseas Scholarships
 
-Changes made via Lovable will be committed automatically to this repo.
+## How to Support
+- One-time donations and monthly subscriptions
+- Campaign-specific contributions
+- Volunteer participation
 
-**Use your preferred IDE**
+## Local Development
+- Install: `npm install`
+- Run dev server: `npm run dev`
+- Build: `npm run build`
+# Project README Template
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Overview
+Provide a brief description of what your project does and its main purpose.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Features
+- Feature 1
+- Feature 2
+- Feature 3
 
-Follow these steps:
+## Installation
+```bash
+# Clone the repository
+git clone <repository-url>
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Install dependencies
+npm install
 ```
 
-**Edit a file directly in GitHub**
+## Usage
+```bash
+# Basic usage example
+npm start
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Technologies
+- Language/Framework
+- Key dependencies
 
-**Use GitHub Codespaces**
+## Project Structure
+```
+project-root/
+├── src/
+├── tests/
+├── README.md
+└── package.json
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Contributing
+Contributions are welcome. Please fork the repository and submit a pull request.
 
-## What technologies are used for this project?
+## License
+[Specify your license]
 
-This project is built with .
+## Author
+[Your name/organization]
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/3d16cc18-3fe5-4fdd-a153-a60aad8efd06) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+---
+**Note:** Customize this template with your specific project details.
