@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -173,7 +173,7 @@ export const getMonthlyStats = async () => {
 
 // Admin authentication - verify admin password
 export const verifyAdminPassword = (password: string): boolean => {
-  const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+  const adminPassword = import.meta.env.ADMIN_PASSWORD;
   return password === adminPassword;
 };
 
