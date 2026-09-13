@@ -31,6 +31,32 @@ export interface Donation {
   updated_at: string;
 }
 
+export interface Admission {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  program: string;
+  message?: string;
+  amount: number;
+  payment_id: string;
+  status: "completed" | "failed";
+  created_at: string;
+}
+
+export const createAdmission = async (
+  admissionData: Omit<Admission, "id" | "created_at">
+): Promise<Admission> => {
+  const { data, error } = await supabase
+    .from("admissions")
+    .insert([{ ...admissionData, created_at: new Date().toISOString() }])
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
 // Get all donations
 export const getAllDonations = async (): Promise<Donation[]> => {
   const { data, error } = await supabase

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const sliderImages = [
   "/img/silder2.jpg",
-  "/img/silder1.jpg",
+  // "/img/silder1.jpg",
   "/img/silder3.jpg",
   "/img/silder4.jpg",
 ];

@@ -54,7 +54,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="section-padding bg-gradient-to-b from-white to-blue-50/30 text-slate-800 relative overflow-hidden"
+      className="section-padding bg-[#fbfaf7] text-[#24312d] relative overflow-hidden"
     >
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-40 z-0"></div>
@@ -72,22 +72,22 @@ const Contact = () => {
           <div className="grid md:grid-cols-5 gap-8">
             {/* Contact Info */}
             <div className="md:col-span-2 animate-on-scroll">
-              <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 rounded-2xl p-8 text-white h-full">
+              <div className="bg-[#24312d] rounded-3xl p-8 text-white h-full shadow-xl">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                    <MessageSquare size={20} className="text-blue-400" />
+                  <div className="w-10 h-10 bg-[#e5a37f]/15 rounded-xl flex items-center justify-center">
+                    <MessageSquare size={20} className="text-[#f2c5a8]" />
                   </div>
                   <h3 className="text-xl font-semibold text-white">Contact Info</h3>
                 </div>
 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
-                      <MapPin size={20} className="text-blue-400" />
+                    <div className="w-12 h-12 rounded-xl bg-[#e5a37f]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#e5a37f]/25 transition-colors">
+                      <MapPin size={20} className="text-[#f2c5a8]" />
                     </div>
                     <div>
-                      <p className="text-blue-200 font-medium mb-1">Address</p>
-                      <p className="text-blue-100/80 text-sm leading-relaxed">
+                      <p className="text-[#f2c5a8] font-medium mb-1">Address</p>
+                      <p className="text-white/70 text-sm leading-relaxed">
                         Dharashiv (Osmanabad)<br />
                         Maharashtra, India 413501
                       </p>
@@ -95,24 +95,24 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
-                      <Phone size={20} className="text-blue-400" />
+                    <div className="w-12 h-12 rounded-xl bg-[#e5a37f]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#e5a37f]/25 transition-colors">
+                      <Phone size={20} className="text-[#f2c5a8]" />
                     </div>
                     <div>
-                      <p className="text-blue-200 font-medium mb-1">Phone</p>
-                      <a href="tel:+917820831901" className="text-blue-100/80 text-sm hover:text-blue-400 transition-colors">
+                      <p className="text-[#f2c5a8] font-medium mb-1">Phone</p>
+                      <a href="tel:+917820831901" className="text-white/70 text-sm hover:text-[#f2c5a8] transition-colors">
                         +91 7820831901
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
-                      <Mail size={20} className="text-blue-400" />
+                    <div className="w-12 h-12 rounded-xl bg-[#e5a37f]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#e5a37f]/25 transition-colors">
+                      <Mail size={20} className="text-[#f2c5a8]" />
                     </div>
                     <div>
-                      <p className="text-blue-200 font-medium mb-1">Email</p>
-                      <a href="mailto:info@parivattan.org" className="text-blue-100/80 text-sm hover:text-blue-400 transition-colors">
+                      <p className="text-[#f2c5a8] font-medium mb-1">Email</p>
+                      <a href="mailto:info@parivattan.org" className="text-white/70 text-sm hover:text-[#f2c5a8] transition-colors">
                         contact@parivattan.org
                       </a>
                     </div>
@@ -121,7 +121,7 @@ const Contact = () => {
 
                 {/* Social hint */}
                 <div className="mt-8 pt-6 border-t border-white/10">
-                  <p className="text-blue-200/70 text-sm">
+                  <p className="text-white/55 text-sm">
                     Follow us on social media for latest updates and events.
                   </p>
                 </div>
@@ -141,7 +141,7 @@ const Contact = () => {
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="text-blue-600 font-medium hover:text-blue-700 transition-colors"
+                    className="text-[#b5623b] font-medium hover:text-[#954b2c] transition-colors"
                   >
                     Send another message
                   </button>
@@ -159,7 +159,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all bg-white/50"
+                      className="w-full border border-[#d9ddd4] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#b5623b]/30 focus:border-[#b5623b] transition-all bg-white/70"
                       placeholder="John Doe"
                       required
                     />
@@ -172,7 +172,7 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all bg-white/50"
+                      className="w-full border border-[#d9ddd4] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#b5623b]/30 focus:border-[#b5623b] transition-all bg-white/70"
                       placeholder="john@example.com"
                       required
                     />
@@ -186,7 +186,7 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all bg-white/50"
+                    className="w-full border border-[#d9ddd4] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#b5623b]/30 focus:border-[#b5623b] transition-all bg-white/70"
                     placeholder="How can we help?"
                     required
                   />
@@ -198,7 +198,7 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full border border-slate-200 rounded-xl px-4 py-3 h-36 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all bg-white/50"
+                    className="w-full border border-[#d9ddd4] rounded-xl px-4 py-3 h-36 resize-none focus:outline-none focus:ring-2 focus:ring-[#b5623b]/30 focus:border-[#b5623b] transition-all bg-white/70"
                     placeholder="Your message here..."
                     required
                   ></textarea>
@@ -207,7 +207,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  className="w-full bg-[#b5623b] hover:bg-[#954b2c] text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
                   {isSubmitting ? (
                     <>

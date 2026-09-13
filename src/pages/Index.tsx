@@ -7,14 +7,9 @@ import Mission from "../components/Mission";
 import Services from "../components/Services";
 import Contact from "../components/Contact";
 import Donate from "../components/Donate";
-import Inspiration from "../components/Inspiration";
 import Testimonials from "../components/Testimonials";
 import Volunteer from "../components/Volunteer";
 import Footer from "../components/Footer";
-import OurWork from "@/components/OurWork";
-import Goals from "@/components/Goals";
-import InspirationGoalsSection from "@/components/InspirationGoalsSection";
-import Visitors from "@/components/Visitors";
 import { logVisitor } from "@/lib/supabase-admin";
 
 const Index = () => {
@@ -61,12 +56,9 @@ const Index = () => {
       {/* <WelcomeModal /> */}
       <Header />
       <Hero />
-      <InspirationGoalsSection />
-      <Visitors />
-      <Donate />
       <Mission />
+      <Donate />
       {/* <Services /> */}
-      <OurWork />
       {/* <Testimonials /> */}
       {/* <Volunteer /> */}
       <Contact/>

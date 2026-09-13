@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Arvo+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
 
 
 
@@ -12,35 +12,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --background: 42 33% 97%;
+    --foreground: 154 17% 17%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 40 33% 99%;
+    --card-foreground: 154 17% 17%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 40 33% 99%;
+    --popover-foreground: 154 17% 17%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 17 51% 47%;
+    --primary-foreground: 42 33% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11.2%;
+    --secondary: 78 19% 91%;
+    --secondary-foreground: 154 17% 17%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 78 19% 91%;
+    --muted-foreground: 150 8% 42%;
 
-    --accent: 217 70% 90%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 37 75% 66%;
+    --accent-foreground: 154 17% 17%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
+    --border: 73 14% 84%;
+    --input: 73 14% 84%;
+    --ring: 17 51% 47%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 
@@ -54,7 +54,10 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans overflow-x-hidden;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: 'DM Sans', sans-serif;
+    background-image: radial-gradient(rgba(36, 49, 45, 0.06) 0.7px, transparent 0.7px);
+    background-size: 18px 18px;
   }
 
   h1,
@@ -63,7 +66,8 @@
   h4,
   h5,
   h6 {
-    @apply font-serif text-heavenly-800 tracking-tight;
+    @apply tracking-tight;
+    font-family: 'DM Serif Display', serif;
   }
 
   p {
@@ -73,32 +77,39 @@
   a {
     @apply transition-colors duration-200;
   }
+
+  ::selection { background: #e5a37f; color: #24312d; }
 }
+
+.page-section { @apply mx-auto w-full max-w-7xl px-5 py-20 md:px-10 md:py-28; }
+.eyebrow { @apply text-sm font-bold uppercase tracking-[0.18em] text-[#b5623b]; }
+.field { @apply flex flex-col gap-2 text-sm font-semibold; }
+.field input, .field select, .field textarea { @apply rounded-2xl border border-[#d9ddd4] bg-[#fbfaf7] px-4 py-3 font-normal outline-none transition focus:border-[#b5623b] focus:ring-2 focus:ring-[#b5623b]/20; }
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out text-center inline-block transform hover:-translate-y-0.5;
+    @apply bg-[#b5623b] hover:bg-[#954b2c] text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out text-center inline-block transform hover:-translate-y-0.5;
   }
 
   .btn-outline {
-    @apply border-2 border-blue-600 hover:bg-blue-600 text-blue-600 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 ease-in-out text-center inline-block;
+    @apply border-2 border-[#b5623b] hover:bg-[#b5623b] text-[#954b2c] hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 ease-in-out text-center inline-block;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-serif font-bold mb-4 text-slate-800 relative inline-block;
+    @apply text-4xl md:text-5xl font-serif font-normal mb-4 text-[#24312d] relative inline-block;
   }
 
   .section-title::after {
     content: '';
-    @apply absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full;
+    @apply absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-[#e5a37f] rounded-full;
   }
 
   .section-subtitle {
-    @apply text-xl font-medium text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed;
+    @apply text-xl font-medium text-[#65706a] mb-12 max-w-2xl mx-auto leading-relaxed;
   }
 
   .glass-card {
-    @apply backdrop-blur-lg bg-white/95 border border-blue-100/50 shadow-xl rounded-2xl;
+    @apply bg-[#fffefb] border border-[#e1e3d9] shadow-[0_18px_50px_-30px_rgba(36,49,45,0.45)] rounded-3xl;
   }
 
   .section-padding {
@@ -110,9 +121,27 @@
   }
 
   .nav-item {
-    @apply text-slate-700 hover:text-blue-600 font-medium transition-colors duration-300;
+    @apply text-[#24312d] hover:text-[#b5623b] font-medium transition-colors duration-300;
   }
 }
+
+/* Legacy home sections inherit the new visual direction without requiring a rewrite of every section. */
+.section-padding { position: relative; }
+.section-padding.bg-white, .section-padding.bg-gradient-to-b, .section-padding.bg-blue-50, .section-padding.bg-blue-50\/30 { background-color: #fbfaf7; background-image: none; }
+.bg-gradient-to-br.from-slate-900, .bg-gradient-to-b.from-slate-900 { background-image: linear-gradient(135deg, #24312d, #34463e) !important; }
+.text-blue-600, .text-blue-500, .text-cyan-500, .text-cyan-400 { color: #b5623b !important; }
+.bg-blue-600, .bg-blue-500, .bg-cyan-500 { background-color: #b5623b !important; }
+.border-blue-100, .border-blue-200, .border-blue-400\/30 { border-color: #e1e3d9 !important; }
+
+/* Keep older component utilities aligned with the current brand palette. */
+[class*="text-blue-"], [class*="text-cyan-"], [class*="text-indigo-"], [class*="text-purple-"], [class*="text-pink-"], [class*="text-emerald-"] { color: #b5623b !important; }
+[class*="hover:text-blue-"]:hover, [class*="hover:text-cyan-"]:hover, [class*="hover:text-indigo-"]:hover, [class*="hover:text-purple-"]:hover { color: #954b2c !important; }
+[class~="bg-blue-50"], [class~="bg-cyan-50"], [class~="bg-indigo-50"], [class~="bg-purple-50"], [class~="bg-pink-50"], [class~="bg-emerald-50"] { background-color: #f6eee8 !important; }
+[class~="bg-blue-100"], [class~="bg-cyan-100"], [class~="bg-indigo-100"], [class~="bg-purple-100"], [class~="bg-pink-100"], [class~="bg-emerald-100"] { background-color: #f2dfd2 !important; }
+[class*="bg-blue-500"], [class*="bg-blue-600"], [class*="bg-cyan-500"], [class*="bg-indigo-500"], [class*="bg-purple-500"] { background-color: #b5623b !important; }
+[class*="border-blue-"], [class*="border-cyan-"], [class*="border-indigo-"], [class*="border-purple-"], [class*="border-pink-"] { border-color: #e1c7b7 !important; }
+[class*="from-blue-"], [class*="from-cyan-"], [class*="from-indigo-"], [class*="from-purple-"] { --tw-gradient-from: #b5623b var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(181 98 59 / 0) var(--tw-gradient-to-position) !important; }
+[class*="to-blue-"], [class*="to-cyan-"], [class*="to-indigo-"], [class*="to-purple-"] { --tw-gradient-to: #e5a37f var(--tw-gradient-to-position) !important; }
 
 .animate-on-scroll {
   opacity: 0;

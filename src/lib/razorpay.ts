@@ -1,25 +1,17 @@
 
-// NOTE: For security, do NOT use real secret keys in production frontend code!
-// This is for demo/dev only. Use env vars or a backend proxy for real apps.
-const RAZORPAY_KEY_ID = "rzp_live_Roni2CefdMucNL"; // Replace with your test key id
-const RAZORPAY_KEY_SECRET = "U746ODhIxbHINOSXaB6kUsQN"; // Replace with your test key secret
+export const getRazorpayKeyId = () => import.meta.env.VITE_RAZORPAY_KEY_ID || import.meta.env.RAZORPAY_KEY_ID;
 
-export const fetchRazorpaySubscriptionsCount = async () => {
-  try {
-    const credentials = btoa(`${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`);
-    const response = await fetch("https://api.razorpay.com/v1/subscriptions", {
-      headers: {
-        Authorization: `Basic ${credentials}`,
-        "Content-Type": "application/json"
-      }
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return Array.isArray(data.items) ? data.items.length : 0;
-  } catch (error) {
-    console.error("Error fetching Razorpay subscriptions count:", error);
-    return 0;
+export const loadRazorpay = () => new Promise<void>((resolve, reject) => {
+  if (window.Razorpay) {
+    resolve();
+    return;
   }
-};
+
+  const script = document.createElement("script");
+  script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  script.onload = () => resolve();
+  script.onerror = () => reject(new Error("Unable to load Razorpay checkout."));
+  document.body.appendChild(script);
+});
+
+export const fetchRazorpaySubscriptionsCount = async () => 0;

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/autoplay';
 import 'swiper/swiper-bundle.css';
 // import 'swiper/swiper.css';
 import { useLiveVisitors } from '@/context/LiveVisitorsContext';
@@ -32,10 +30,10 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900"
+      className="relative min-h-[760px] flex items-center justify-center overflow-hidden bg-[#24312d]"
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/60 via-slate-900/50 to-slate-900/80 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#24312d]/95 via-[#24312d]/60 to-[#24312d]/30 z-10"></div>
 
         {/* Background Image Slider */}
         <Swiper
@@ -55,13 +53,13 @@ const Hero = () => {
               className="w-full h-full object-cover"
             />
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <img
               src="/img/silder1.jpg"
               alt="Community Support and Education"
               className="w-full h-full object-cover"
             />
-          </SwiperSlide>
+          </SwiperSlide> */}
           <SwiperSlide>
             <img
               src="/img/silder2.jpg"
@@ -86,33 +84,33 @@ const Hero = () => {
         </Swiper>
       </div>
 
-      <div className="container mx-auto px-4 z-10 text-center pt-20">
+      <div className="container mx-auto px-5 z-10 text-left pt-20">
         <div className="flex flex-col items-center gap-3 mb-6">
-          <div className="inline-block px-4 py-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full">
+          {/* <div className="inline-block px-4 py-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full">
             <span className="text-blue-200 font-medium text-sm uppercase tracking-wider">Empowering Communities Since 2020</span>
-          </div>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold">
+          </div> */}
+          {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-300 animate-pulse"></span>
             {liveVisitors === 1 ? '1 person viewing now' : `${liveVisitors} people viewing now`}
-          </div>
+          </div> */}
         </div>
+        <div className="mb-7 max-w-3xl text-sm font-bold uppercase tracking-[0.2em] text-[#f2c5a8]">Education creates room to choose</div>
         <h1
           ref={titleRef}
-          className="opacity-0 text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight text-white"
+          className="opacity-0 max-w-4xl text-5xl md:text-7xl lg:text-8xl font-serif font-normal mb-6 leading-[0.98] text-white"
         >
-          Revolution Through<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Education</span>
+          Education should open <span className="text-[#f2c5a8]">more doors.</span>
         </h1>
         <p
           ref={subtitleRef}
-          className="opacity-0 text-xl md:text-2xl text-blue-100/90 max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="opacity-0 text-lg md:text-xl text-white/75 max-w-2xl mb-10 leading-relaxed"
         >
-          Join our mission to bring hope, education, and humanity to those who
-          need it most. Together, we can make a difference.
+          Parivattan builds practical learning pathways with communities, so more people can move toward the future they imagine.
         </p>
-        <div ref={buttonRef} className="opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div ref={buttonRef} className="opacity-0 flex flex-col sm:flex-row gap-4 items-start">
           <a 
             href="#donate" 
-            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center gap-2"
+            className="px-8 py-4 bg-[#e5a37f] text-[#24312d] font-semibold rounded-full hover:bg-[#f2c5a8] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
@@ -121,7 +119,7 @@ const Hero = () => {
           </a>
           <a 
             href="#mission" 
-            className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border-2 border-white/30 hover:bg-white/20 transition-all duration-300 flex items-center gap-2"
+            className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/35 hover:bg-white/20 transition-all duration-300 flex items-center gap-2"
           >
             Learn More About Us
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

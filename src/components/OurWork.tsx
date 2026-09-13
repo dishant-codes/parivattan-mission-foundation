@@ -175,7 +175,7 @@ const OurWork = () => {
                   <Button 
                     size="sm" 
                     className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl"
-                    onClick={() => window.open("https://razorpay.me/@parivattanmissionfoundation", "_blank")}
+                    onClick={() => window.location.href = "/donate"}
                   >
                     <Heart className="w-4 h-4 mr-1" />
                     Support
